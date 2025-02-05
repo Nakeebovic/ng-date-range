@@ -186,3 +186,6 @@ For support, please open an issue in the GitHub repository or contact us at [you
 - Customizable styling
 - Min/Max date restrictions
 - Language switching
+
+
+
