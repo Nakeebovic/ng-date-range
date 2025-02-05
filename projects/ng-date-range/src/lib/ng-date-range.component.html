@@ -1,0 +1,116 @@
+<!-- date-range.component.html -->
+<div class="calendar-container" [dir]="this.translate.currentLang === 'ar' ? 'rtl' : 'ltr'" (clickOutside)="handleClickOutside()">
+  <!-- Date Input Fields -->
+  <div class="date-inputs">
+    <div class="row small-row row-gap-3">
+      <!-- From Date -->
+      <div class="position-relative" [ngClass]="{'col-sm-6': showToDate, 'col-12': !showToDate}">
+        <label *ngIf="showLabel" class="fs-6_5 text-neturalColor-6 fw-semibold mb-1">{{ t('fromDate') }}</label>
+        <div class="date-field small-h bg-white" (click)="toggleFromCalendar()">
+          <input type="text" [value]="formatDate(fromDate())" readonly [placeholder]="translate.currentLang === 'ar' ? arFromPlacholder || t('from') : enFromPlacholder || t('from')" />
+          <span class="calendar-icon"><img width="20" src="assets/images/icons/calendar.svg" /></span>
+        </div>
+
+        <!-- From Date Calendar Popup -->
+        <div class="calendar-popup from-date" *ngIf="showFromCalendar()">
+          <div class="calendar-header py-2 px-md-3 px-2">
+            <button type="button" class="nav-btn d-flex align-items-center" (click)="previousMonth()">
+              <div><img  src="assets/images/icons/arrow-prev.svg" alt="prev arrow icon" class="responsive-img" /></div>
+            </button>
+
+            <div class="month-year-select flex-grow-1 form-group">
+              <select [(ngModel)]="currentMonth" class="fs-7 form-select shadow-none">
+                <option *ngFor="let month of t('months'); let i = index" [value]="i">
+                  {{ month }}
+                </option>
+              </select>
+
+              <select [(ngModel)]="currentYear" class="fs-7 form-select shadow-none">
+                <option *ngFor="let year of years()" [value]="year">{{ year }}</option>
+              </select>
+            </div>
+
+            <button type="button" class="nav-btn d-flex align-items-center" (click)="nextMonth()">
+              <div><img src="assets/images/icons/arrow-next.svg" alt="next arrow icon" class="responsive-img" /></div>
+            </button>
+          </div>
+
+          <div class="weekdays-header">
+            <div class="weekday" *ngFor="let day of t('weekDays')">
+              {{ day }}
+            </div>
+          </div>
+
+          <div class="calendar-grid">
+            <div *ngFor="let day of calendarDays()" class="calendar-day fs-7" [class.other-month]="!day.currentMonth" [class.selected]="isSelectedDate(day.date)" [class.disabled]="isDateDisabled('from', day.date)" (click)="!isDateDisabled('from', day.date) && selectDate(day.date, 'from')">
+              {{ day.dayNumber }}
+            </div>
+          </div>
+
+          <div class="calendar-actions">
+            <button type="button" class="btn btn-primary fs-7" (click)="applySelection('from')">
+              {{ t('apply') }}
+            </button>
+            <button type="button" class="btn btn-outline-primary fs-7" (click)="cancelSelection('from')">
+              {{ t('clear') }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- To Date -->
+      <div class="col-sm-6 col-12 position-relative" *ngIf="showToDate">
+        <label *ngIf="showLabel" class="fs-6_5 text-neturalColor-6 fw-semibold mb-1">{{ t('toDate') }}</label>
+        <div class="date-field small-h bg-white" (click)="toggleToCalendar()">
+          <input type="text" [value]="formatDate(toDate())" readonly [placeholder]="translate.currentLang == 'ar' ? (arToPlacholder ? arToPlacholder : t('to')) : enToPlacholder ? enToPlacholder : t('to')" />
+          <span class="calendar-icon"><img width="20" src="assets/images/icons/calendar.svg" /></span>
+        </div>
+        <!-- To Date Calendar Popup -->
+        <div class="calendar-popup to-date" *ngIf="showToCalendar()">
+          <div class="calendar-header py-2 px-md-3 px-2">
+            <button type="button" class="nav-btn" (click)="previousMonth()">
+              <div><img src="assets/images/icons/arrow-prev.svg" alt="prev arrow icon" class="responsive-img" /></div>
+            </button>
+
+            <div class="month-year-select form-group flex-grow-1">
+              <select [(ngModel)]="currentMonth" class="fs-7 form-select shadow-none">
+                <option *ngFor="let month of t('months'); let i = index" [value]="i">
+                  {{ month }}
+                </option>
+              </select>
+
+              <select [(ngModel)]="currentYear" class="fs-7 form-select shadow-none">
+                <option *ngFor="let year of years()" [value]="year">{{ year }}</option>
+              </select>
+            </div>
+
+            <button type="button" class="nav-btn" (click)="nextMonth()">
+              <div><img src="assets/images/icons/arrow-next.svg" alt="next arrow icon" class="responsive-img" /></div>
+            </button>
+          </div>
+
+          <div class="weekdays-header">
+            <div class="weekday" *ngFor="let day of t('weekDays')">
+              {{ day }}
+            </div>
+          </div>
+
+          <div class="calendar-grid">
+            <div *ngFor="let day of calendarDays()" class="calendar-day fs-7" [class.other-month]="!day.currentMonth" [class.selected]="isSelectedDate(day.date)" [class.disabled]="isDateDisabled('to', day.date)" (click)="!isDateDisabled('to', day.date) && selectDate(day.date, 'to')">
+              {{ day.dayNumber }}
+            </div>
+          </div>
+
+          <div class="calendar-actions">
+            <button type="button" class="btn btn-primary fs-7" (click)="applySelection('to')">
+              {{ t('apply') }}
+            </button>
+            <button type="button" class="btn btn-outline-primary fs-7" (click)="cancelSelection('to')">
+              {{ t('clear') }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

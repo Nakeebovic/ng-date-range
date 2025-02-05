@@ -1,0 +1,215 @@
+@import '../../../../assets/sass/mixins';
+
+:host {
+  display: block;
+}
+/* date-range.component.scss */
+.calendar-container {
+  position: relative;
+  width: 100%;
+
+  margin: 0 auto;
+}
+
+.language-switch {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+
+  button {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &.active {
+      background: map_get($theme-colors, primary);
+      color: white;
+      border-color: map_get($theme-colors, primary);
+    }
+
+    &:hover:not(.active) {
+      background: #f0f0f0;
+    }
+  }
+}
+
+
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  label {
+    font-weight: 500;
+    color: #333;
+  }
+}
+
+.date-field {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+
+
+  &:hover {
+    border-color: map_get($theme-colors, primary);
+  }
+
+  input {
+    border: none;
+    outline: none;
+    width: 100%;
+   font-size: .875rem;
+    background: transparent;
+    cursor: pointer;
+  }
+}
+
+.calendar-popup {
+
+
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 0.5rem;
+  z-index: 1000;
+   @media(min-width:380px){
+     width: 312px;
+   }
+   @media(max-width:379.98px){
+     width: 100%;
+   }
+   &.from-date{
+    @include position(absolute, 100%, 0 , null ,null)
+   }
+   &.to-date{
+     @include position(absolute, 100%, null , null ,0)
+   }
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border-bottom: 1px solid #eee;
+
+  .nav-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #666;
+    font-size: 1rem;
+    vertical-align: middle;
+
+    &:hover {
+      color: map_get($theme-colors, primary);
+    }
+  }
+}
+
+.month-year-select {
+  display: flex;
+  gap: 0.5rem;
+
+  select {
+    padding: 0.3rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    height: 38px;
+
+    cursor: pointer;
+
+      width: 50%;
+
+
+
+    &:focus {
+      outline: none;
+      border-color: map_get($theme-colors, primary);
+    }
+    @include rtl(background-position,right .15rem center,left .15rem center)
+
+  }
+}
+
+.weekdays-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: #f8f9fa;
+  border-bottom: 1px solid #eee;
+
+  .weekday {
+    text-align: center;
+    font-size: 0.62rem;
+    color: #666;
+    padding: 0.5rem .2rem;
+    text-overflow: ellipsis;
+
+    overflow: hidden;
+  }
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 0.5rem;
+  gap: 4px;
+  background: #fff;
+
+  .calendar-day {
+    text-align: center;
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+
+    &:hover:not(.disabled):not(.selected) {
+      background: #f0f0f0;
+    }
+
+    &.other-month {
+      color: #aaa;
+    }
+
+    &.selected {
+      background: map_get($theme-colors, primary);
+      color: white;
+    }
+
+    &.disabled {
+      color: #ddd;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.calendar-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  border-top: 1px solid #eee;
+
+  button {
+    width: 90px;
+    transition: all 0.3s ease;
+
+
+  }
+}
+
+[dir='rtl'] {
+  .calendar-icon {
+    transform: scaleX(-1);
+  }
+}
