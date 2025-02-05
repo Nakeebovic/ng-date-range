@@ -1,0 +1,79 @@
+$theme-colors: (
+  primary: #2BB9CA,
+  primaryColor-1: #EAF8FA,
+  primaryColor-2: #BDE9EF,
+  primaryColor-3: #9DDFE7,
+  primaryColor-4: #71D0DB,
+  primaryColor-5: #55C7D5,
+  primaryColor-7: #27A8B8,
+  primaryColor-8: #1F838F,
+  primaryColor-9: #18666F,
+  primaryColor-10: #124E55,
+
+  dark-blue:#022A52,
+
+  neturalColor-1:#e6e9ed,
+  neturalColor-2:#B0BBC6,
+  neturalColor-3:#8A9AAA,
+  neturalColor-4:#546C84,
+  neturalColor-5:#33506C,
+  neturalColor-6:#002447,
+  neturalColor-7:#002141,
+  neturalColor-8:#001A32,
+  neturalColor-9:#001427,
+  neturalColor-10:#000F1E,
+
+
+  success:#12B76A,
+  warning:#F79008,
+  danger: #CB1A0E,
+  white: #ffffff,
+  black: #000000,
+  placeholder: #9098A2,
+
+  grayOpacity-1: #F1F2F3,
+  grayOpacity-2: #E3E5E8,
+  grayOpacity-3: #D1D5DB,
+  grayOpacity-4: #ABB2BA,
+  grayOpacity-5: #9098A2,
+  grayOpacity-6: #6E7887,
+  grayOpacity-7: #5D656F,
+  grayOpacity-8: #454C54,
+  grayOpacity-9: #2E3238,
+  grayOpacity-10: #17191C,
+
+  overlay-white:rgba(230, 233, 237, 0.30),
+  overlay-success:#ECF5F3,
+  overlay-warning:#fcf7f4,
+  overlay-danger:#FCF2F1,
+
+  light-bg:#FAFAFA,
+
+
+
+
+);
+
+$filter-colors: (
+  primary: brightness(0) saturate(100%) invert(59%) sepia(42%) saturate(733%) hue-rotate(138deg) brightness(88%) contrast(88%),
+  dark: brightness(0),
+  success : brightness(0) saturate(100%) invert(49%) sepia(90%) saturate(419%) hue-rotate(100deg) brightness(96%) contrast(92%),
+  white: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7497%) hue-rotate(340deg) brightness(99%) contrast(102%),
+  danger: brightness(0) saturate(100%) invert(25%) sepia(94%) saturate(3464%) hue-rotate(349deg) brightness(83%) contrast(106%),
+  grayOpacity-7: brightness(0) saturate(100%) invert(45%) sepia(13%) saturate(466%) hue-rotate(177deg) brightness(99%) contrast(84%),
+  mint: brightness(0) saturate(100%) invert(36%) sepia(80%) saturate(814%) hue-rotate(133deg) brightness(94%) contrast(88%),
+  neturalColor-9: brightness(0) saturate(100%) invert(7%) sepia(38%) saturate(2210%) hue-rotate(179deg) brightness(97%) contrast(104%),
+  neturalColor-4: brightness(0) saturate(100%) invert(40%) sepia(31%) saturate(413%) hue-rotate(169deg) brightness(94%) contrast(90%)
+);
+
+
+$base-fonts: (
+  'rtl': "IBM Plex Sans Arabic",
+  'ltr': "IBM Plex Sans Arabic"
+);
+
+$font-weights:(
+  "regular":400,
+  "medium":500,
+  "bold":700
+)

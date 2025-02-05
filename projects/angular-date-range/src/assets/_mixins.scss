@@ -1,0 +1,132 @@
+@import "variables";
+
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: woff2 woff ttf svg) {
+  $src: null;
+  $extmods: (
+    svg: "#" + str-replace($name, " ", "_")
+  );
+$formats: (
+  ttf: "truetype"
+);
+
+@each $ext in $exts {
+  $extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+  $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+  $src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
+}
+
+@font-face {
+  font-family: quote($name);
+  font-style: $style;
+  font-weight: $weight;
+  src: $src;
+  font-display: swap;
+}
+}
+
+
+// howToCall: @include font('type');
+@mixin font($type) {
+  font-weight: map-get($font-weights, $type);
+}
+
+// howToCall:  @include rtl('text-align',val , val);
+@mixin rtl($property, $ltr-value, $rtl-value) {
+  html[dir=ltr] & {
+    #{$property}: $ltr-value;
+  }
+
+  ::ng-deep html[dir=ltr] & {
+    #{$property}: $ltr-value;
+  }
+
+  html[dir=rtl] & {
+    #{$property}: $rtl-value;
+  }
+
+  ::ng-deep html[dir=rtl] & {
+    #{$property}: $rtl-value;
+  }
+}
+
+//howToCall: @include absolute( val, val, val, val);
+//howToCall: @include position( position , top, right, bottom, left);
+//howToCall: @include position( position_type , val, val, val, val);
+@mixin position($type, $top : null, $right : null, $bottom : null, $left : null) {
+  position: $type;
+
+  @if ($top !=null) {
+    top: $top;
+  }
+
+  @if ($bottom !=null) {
+    bottom: $bottom;
+  }
+
+  html[dir=rtl] & {
+    @if ($right !=null) {
+      right: $right;
+    }
+
+    @if ($left !=null) {
+      left: $left;
+    }
+  }
+
+  ::ng-deep html[dir=rtl] & {
+    @if ($right !=null) {
+      right: $right;
+    }
+
+    @if ($left !=null) {
+      left: $left;
+    }
+  }
+
+
+  ::ng-deep html[dir=ltr] & {
+    @if ($left !=null) {
+      right: $left;
+    }
+
+    @if ($right !=null) {
+      left: $right;
+    }
+  }
+
+
+  html[dir=ltr] & {
+    @if ($left !=null) {
+      right: $left;
+    }
+
+    @if ($right !=null) {
+      left: $right;
+    }
+  }
+}
+
+// $type : margin or padding or order
+// $t-direction : direction in arabic version [default language]
+// $t-val : value of property
+
+//howToCall: @include property_dir('margin', 'left', 15px);
+@mixin property_dir($type, $t-direction, $t-val) {
+  ::ng-deep html[dir=rtl] & {
+    #{$type}-#{$t-direction}: $t-val;
+  }
+
+  html[dir=rtl] & {
+    #{$type}-#{$t-direction}: $t-val;
+  }
+
+  ::ng-deep html[dir=ltr] & {
+    $ltr-direction: if($t-direction =='left', 'right', 'left');
+    #{$type}-#{$ltr-direction}: $t-val;
+  }
+
+  html[dir=ltr] & {
+    $ltr-direction: if($t-direction =='left', 'right', 'left');
+    #{$type}-#{$ltr-direction}: $t-val;
+  }
+}

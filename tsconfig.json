@@ -10,8 +10,8 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "ng-date-range": [
-        "./dist/ng-date-range"
+      "angular-date-range": [
+        "./dist/angular-date-range"
       ]
     },
     "skipLibCheck": true,

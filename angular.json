@@ -3,23 +3,23 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ng-date-range": {
+    "angular-date-range": {
       "projectType": "library",
-      "root": "projects/ng-date-range",
-      "sourceRoot": "projects/ng-date-range/src",
+      "root": "projects/angular-date-range",
+      "sourceRoot": "projects/angular-date-range/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/ng-date-range/ng-package.json"
+            "project": "projects/angular-date-range/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/ng-date-range/tsconfig.lib.prod.json"
+              "tsConfig": "projects/angular-date-range/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/ng-date-range/tsconfig.lib.json"
+              "tsConfig": "projects/angular-date-range/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -27,7 +27,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "tsConfig": "projects/ng-date-range/tsconfig.spec.json",
+            "tsConfig": "projects/angular-date-range/tsconfig.spec.json",
             "polyfills": [
               "zone.js",
               "zone.js/testing"

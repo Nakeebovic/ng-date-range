@@ -3,18 +3,18 @@ import { ChangeDetectionStrategy, Component, Input, OnInit, Output, EventEmitter
 import { FormsModule } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { ClickOutsideDirective } from './click-outside.directive';
-import { CalendarDay, DateRangeTranslations } from './ng-date-range.types';
-import { translations } from './ng-date-range.translations';
+import { CalendarDay, DateRangeTranslations } from './angular-date-range.types';
+import { translations } from './angular-date-range.translations';
 
 @Component({
-  selector: 'app-date-range',
+  selector: 'angular-date-range',
   standalone: true,
   imports: [CommonModule, FormsModule, ClickOutsideDirective],
-  templateUrl: './ng-date-range.component.html',
-  styleUrl: './ng-date-range.component.scss',
+  templateUrl: './angular-date-range.component.html',
+  styleUrl: './angular-date-range.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DateRangeComponent implements OnInit {
+export class AngularDateRangeComponent implements OnInit {
   @Input() defaultLang: 'en' | 'ar' = 'en';
   @Input() minDate?: Date;
   @Input() maxDate?: Date;

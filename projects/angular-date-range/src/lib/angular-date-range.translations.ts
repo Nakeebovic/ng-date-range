@@ -1,4 +1,4 @@
-import { DateRangeTranslations } from "./date-range.types";
+import { DateRangeTranslations } from "./angular-date-range.types";
 
 export const translations: Record<'en' | 'ar', DateRangeTranslations> = {
     ar: {

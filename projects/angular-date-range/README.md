@@ -2,8 +2,8 @@
 
 A flexible, standalone Angular date range picker component with built-in support for RTL languages (Arabic/English) and customizable styling.
 
-![npm](https://img.shields.io/npm/v/ng-date-range)
-![license](https://img.shields.io/npm/l/ng-date-range)
+![npm](https://img.shields.io/npm/v/angular-date-range)
+![license](https://img.shields.io/npm/l/angular-date-range)
 ![Angular](https://img.shields.io/badge/Angular-17.x-red)
 
 ## Features
@@ -21,7 +21,7 @@ A flexible, standalone Angular date range picker component with built-in support
 ## Installation
 
 ```bash
-npm install ng-date-range @ngx-translate/core
+npm install angular-date-range @ngx-translate/core
 ```
 
 ## Usage
@@ -29,18 +29,18 @@ npm install ng-date-range @ngx-translate/core
 1. Import the component in your module or standalone component:
 
 ```typescript
-import { DateRangeComponent } from 'ng-date-range';
+import { AngularDateRangeComponent } from 'angular-date-range';
 
 @Component({
   // ...
-  imports: [DateRangeComponent]
+  imports: [AngularDateRangeComponent]
 })
 ```
 
 2. Use it in your template:
 
 ```html
-<app-date-range
+<angular-date-range
   [defaultLang]="'en'"
   [minDate]="minDate"
   [maxDate]="maxDate"
@@ -51,7 +51,7 @@ import { DateRangeComponent } from 'ng-date-range';
   (dateRangeChange)="onDateRangeChange($event)"
   (languageChange)="onLanguageChange($event)"
 >
-</app-date-range>
+</angular-date-range>
 ```
 
 ## Inputs
@@ -81,20 +81,20 @@ import { DateRangeComponent } from 'ng-date-range';
 
 ```typescript
 import { Component } from '@angular/core';
-import { DateRangeComponent } from 'ng-date-range';
+import { AngularDateRangeComponent } from 'angular-date-range';
 
 @Component({
   selector: 'app-root',
   template: `
-    <app-date-range
+    <angular-date-range
       [minDate]="minDate"
       [maxDate]="maxDate"
       (dateRangeChange)="onDateRangeChange($event)"
     >
-    </app-date-range>
+    </angular-date-range>
   `,
   standalone: true,
-  imports: [DateRangeComponent]
+  imports: [AngularDateRangeComponent]
 })
 export class AppComponent {
   minDate = new Date(2024, 0, 1);
@@ -140,7 +140,7 @@ The component automatically handles RTL layouts based on the selected language. 
 The component comes with built-in translations for English and Arabic. You can customize the translations by providing your own translation service:
 
 ```typescript
-import { translations } from 'ng-date-range';
+import { translations } from 'angular-date-range';
 
 // Extend or modify the existing translations
 const customTranslations = {

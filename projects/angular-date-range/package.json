@@ -1,5 +1,5 @@
 {
-  "name": "ng-date-range",
+  "name": "angular-date-range",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^19.1.0",
@@ -20,7 +20,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Nakeebovic/ng-date-range"
+    "url": "https://github.com/Nakeebovic/angular-date-range"
   },
   "license": "MIT"
 }
