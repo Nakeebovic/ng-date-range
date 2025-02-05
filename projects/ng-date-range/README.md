@@ -165,27 +165,10 @@ const customTranslations = {
 - Safari (latest)
 - Edge (latest)
 
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Support
-
-For support, please open an issue in the GitHub repository or contact us at [your-email@example.com].
-
-## Changelog
-
-### 1.0.0
-- Initial release
-- Basic date range picker functionality
-- RTL support
-- Customizable styling
-- Min/Max date restrictions
-- Language switching
 
 
 
