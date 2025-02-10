@@ -21,7 +21,7 @@ A flexible, standalone Angular date range picker component with built-in support
 ## Installation
 
 ```bash
-npm install angular-date-range-lib @ngx-translate/core
+npm install date-range-angular-lib @ngx-translate/core
 ```
 
 ## Usage
