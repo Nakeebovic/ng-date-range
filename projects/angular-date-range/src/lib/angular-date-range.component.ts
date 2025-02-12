@@ -1,10 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, OnInit, Output, EventEmitter, signal, computed, SimpleChanges } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+  Output,
+  EventEmitter,
+  signal,
+  computed,
+  SimpleChanges,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { ClickOutsideDirective } from './click-outside.directive';
 import { CalendarDay, DateRangeTranslations } from './angular-date-range.types';
 import { translations } from './angular-date-range.translations';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'angular-date-range',
@@ -27,11 +38,16 @@ export class AngularDateRangeComponent implements OnInit {
   @Input() initialFromDate?: string | Date | null;
   @Input() initialToDate?: string | Date | null;
 
-  @Output() dateRangeChange = new EventEmitter<{ fromDate: string | Date | null; toDate: string | Date | null }>();
+  @Output() dateRangeChange = new EventEmitter<{
+    fromDate: string | Date | null;
+    toDate: string | Date | null;
+  }>();
   @Output() languageChange = new EventEmitter<'en' | 'ar'>();
+  private langChangeSubscription?: Subscription;
 
   // Enhanced signals with better typing
   currentLang = signal<'en' | 'ar'>('en');
+  direction = computed(() => (this.currentLang() === 'ar' ? 'rtl' : 'ltr'));
   fromDate = signal<Date | null>(null);
   toDate = signal<Date | null>(null);
   showFromCalendar = signal(false);
@@ -49,7 +65,13 @@ export class AngularDateRangeComponent implements OnInit {
   private tempFromDate: Date | null = null;
   private tempToDate: Date | null = null;
 
-  constructor(public translate: TranslateService) {}
+  constructor(public translate: TranslateService) {
+    // Subscribe to language changes
+    this.langChangeSubscription = this.translate.onLangChange.subscribe(() => {
+      this.currentLang.set(this.translate.currentLang as 'en' | 'ar');
+      this.languageChange.emit(this.currentLang());
+    });
+  }
 
   ngOnInit(): void {
     const detectedLang = this.translate.currentLang as 'en' | 'ar';
@@ -58,8 +80,10 @@ export class AngularDateRangeComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if ((changes['initialFromDate'] || changes['initialToDate']) && 
-        !changes['initialFromDate']?.firstChange) {
+    if (
+      (changes['initialFromDate'] || changes['initialToDate']) &&
+      !changes['initialFromDate']?.firstChange
+    ) {
       this.initializeDates();
     }
   }
@@ -97,7 +121,7 @@ export class AngularDateRangeComponent implements OnInit {
 
   private parseDate(date: string | Date): Date | null {
     if (!date) return null;
-    
+
     if (date instanceof Date) {
       return new Date(date.getFullYear(), date.getMonth(), date.getDate());
     }
@@ -187,7 +211,11 @@ export class AngularDateRangeComponent implements OnInit {
   selectDate(date: Date, type: 'from' | 'to'): void {
     if (this.isDateDisabled(type, date)) return;
 
-    const normalizedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    const normalizedDate = new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate()
+    );
 
     if (type === 'from') {
       this.tempFromDate = normalizedDate;
@@ -203,7 +231,9 @@ export class AngularDateRangeComponent implements OnInit {
   }
 
   isSelectedDate(date: Date): boolean {
-    const selectedDate = this.showFromCalendar() ? this.tempFromDate : this.tempToDate;
+    const selectedDate = this.showFromCalendar()
+      ? this.tempFromDate
+      : this.tempToDate;
     if (!selectedDate) return false;
     return this.isSameDate(date, selectedDate);
   }
@@ -260,17 +290,21 @@ export class AngularDateRangeComponent implements OnInit {
   formatDate(date: Date | string | null): string {
     if (!date) return '';
     if (typeof date === 'string') return date;
-    
+
     const day = date.getDate().toString().padStart(2, '0');
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const year = date.getFullYear();
-    
+
     return `${day}/${month}/${year}`;
   }
 
   isDateDisabled(type: 'from' | 'to', date: Date): boolean {
-    const normalizedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-    
+    const normalizedDate = new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate()
+    );
+
     if (this.minDate) {
       const normalizedMinDate = new Date(
         this.minDate.getFullYear(),
@@ -279,7 +313,7 @@ export class AngularDateRangeComponent implements OnInit {
       );
       if (normalizedDate < normalizedMinDate) return true;
     }
-    
+
     if (this.maxDate) {
       const normalizedMaxDate = new Date(
         this.maxDate.getFullYear(),
@@ -317,5 +351,10 @@ export class AngularDateRangeComponent implements OnInit {
       fromDate: null,
       toDate: null,
     });
+  }
+  ngOnDestroy(): void {
+    if (this.langChangeSubscription) {
+      this.langChangeSubscription.unsubscribe();
+    }
   }
 }

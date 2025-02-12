@@ -1,7 +1,7 @@
 <!-- date-range.component.html -->
 <div
   class="calendar-container"
-  [dir]="this.translate.currentLang === 'ar' ? 'rtl' : 'ltr'"
+  [attr.dir]="direction()"
   (clickOutside)="handleClickOutside()"
 >
   <!-- Date Input Fields -->
